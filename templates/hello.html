@@ -6,8 +6,9 @@
     <title>photo_rank</title>
 </head>
 <body>
-<p>
-        <img src="/static/image/temp/temp.jpg" alt="pic01">
+<p>{% if input_path %}
+        <img src={{input_path}} alt="pic01">
+        {% endif %}
         <form action = "/next" method = "POST">
         <button type="submit" name="bt" value="good">Good</button>
         <button type="submit" name="bt" value="midle">MIDLE</button>
