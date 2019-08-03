@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
+       
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <title>photo_rank</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <title>movie_list</title>
 </head>
-<body>
-<p>{% if input_path %}
-        <img src={{input_path}} alt="pic01">
-        {% endif %}
-        
-        <form action = "/next" method = "POST">
-        <button class="bt1" type="submit" name="bt" value="good" style="WIDTH: 300px; HEIGHT: 500px">Good</button>
-        <button class="bt1" type="submit" name="bt" value="midle" style="WIDTH: 300px; HEIGHT: 500px">MIDLE</button>
-        <button class="bt1" type="submit" name="bt"  value="bad"style="WIDTH: 300px; HEIGHT: 500px">BAD</button>
-    </form>
-        
-    </p>
+<body bgcolor="#000" text="#fff">
+<p></p>
+<p><table>
+    {% for o in all_list %}
+        <tr><td><a href={{o}}><br>{{o}}</a></td><form action = "/next" method = "POST">
+            <td><button class="bt1" type="submit" name="bt" value="good,{{o}}"  style="WIDTH: 50px; HEIGHT: 20px">Good</button></td>
+            <td><button class="bt1" type="submit" name="bt" value="midle,{{o}}"  style="WIDTH: 50px; HEIGHT: 20px">MIDLE</button></td>
+            <td><button class="bt1" type="submit" name="bt"  value="bad,{{o}}"  style="WIDTH: 50px; HEIGHT: 20px">BAD</button></td><br>
+      </tr>{% endfor %}
+    </form></table></p>
 </body>
 </html>

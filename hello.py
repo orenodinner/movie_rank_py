@@ -6,6 +6,8 @@ from flask import render_template,request
 from pathlib import Path
 import glob
 import shutil
+import split
+
 
 app = Flask(__name__)
 
@@ -13,8 +15,8 @@ app = Flask(__name__)
 all_list =[]
 num_count = 0
 
-p = Path("static/image/input")
-all_list = list(p.glob("*.jpg"))
+p = Path("static/movie/input")
+all_list = list(p.glob("*.mp4"))
 app.logger.debug(all_list)
 
 
@@ -25,27 +27,28 @@ def hello(name=None):
     #shutil.copy(str(all_list[num_count]),"static/image/temp/temp.jpg")
     input_path = str(all_list[num_count])
     
-    return render_template('hello.html', input_path=input_path)
+    return render_template('hello.html', all_list = all_list)
 
 @app.route('/next' ,methods=['POST'])
-def rank(name=None):
+def rank(name=None ):
     global num_count
     global all_list
     if request.method == "POST":
         res = request.form["bt"]
-        if res =="good":
-            move_path = "static/image/good/"
-        elif res == "midle":
-            move_path = "static/image/midle/"
-        elif res == "bad":
-            move_path = "static/image/bad/"
+        res_list = res.split(",")
+     #   file_name = request.form["file"]
+        if res_list[0] =="good":
+            move_path = "static/movie/good/"
+        elif res_list[0]  == "midle":
+            move_path = "static/movie/midle/"
+        elif res_list[0]  == "bad":
+            move_path = "static/movie/bad/"
             pass                
-        shutil.move(str(all_list[num_count]),move_path)
-        num_count = num_count +1
-        #shutil.copy(str(all_list[num_count]),"static/image/temp/temp.jpg")
-        input_path = str(all_list[num_count])
-
-    return render_template('hello.html', input_path = input_path)
+        shutil.move(res_list[1],move_path)
+        p = Path("static/movie/input")
+        all_list = list(p.glob("*.mp4"))
+        app.logger.debug(all_list)
+    return render_template('hello.html', all_list = all_list)
 
 if __name__ == '__main__':
     app.run(debug=True , host='0.0.0.0', port=5000)
