@@ -7,6 +7,7 @@ from pathlib import Path
 import glob
 import shutil
 import split
+import os
 
 
 app = Flask(__name__)
@@ -44,7 +45,11 @@ def rank(name=None ):
         elif res_list[0]  == "bad":
             move_path = "static/movie/bad/"
             pass                
-        shutil.move(res_list[1],move_path)
+        file_name = os.path.basename(res_list[1])
+        if os.path.exists(move_path + file_name):
+            shutil.move(res_list[1],"static/movie/del/")
+        else:
+            shutil.move(res_list[1],move_path)
         p = Path("static/movie/input")
         all_list = list(p.glob("*.mp4"))
         app.logger.debug(all_list)
