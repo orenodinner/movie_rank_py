@@ -30,6 +30,29 @@ def hello(name=None):
     
     return render_template('hello.html', all_list = all_list)
 
+@app.route('/good')
+def good(name=None):
+    global num_count
+    global all_list
+    #shutil.copy(str(all_list[num_count]),"static/image/temp/temp.jpg")
+    input_path = str(all_list[num_count])
+    p = Path("static/movie/good")
+    all_list = list(p.glob("*.mp4"))
+    app.logger.debug(all_list)
+    return render_template('hello.html', all_list = all_list)
+
+@app.route('/midle')
+def good(name=None):
+    global num_count
+    global all_list
+    #shutil.copy(str(all_list[num_count]),"static/image/temp/temp.jpg")
+    input_path = str(all_list[num_count])
+    p = Path("static/movie/midle")
+    all_list = list(p.glob("*.mp4"))
+    app.logger.debug(all_list)
+    return render_template('hello.html', all_list = all_list)
+
+
 @app.route('/next' ,methods=['POST'])
 def rank(name=None ):
     global num_count
