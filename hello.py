@@ -42,7 +42,7 @@ def good(name=None):
     return render_template('hello.html', all_list = all_list)
 
 @app.route('/midle')
-def good(name=None):
+def midle(name=None):
     global num_count
     global all_list
     #shutil.copy(str(all_list[num_count]),"static/image/temp/temp.jpg")
