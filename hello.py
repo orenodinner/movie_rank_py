@@ -28,6 +28,9 @@ def hello(name=None):
     #shutil.copy(str(all_list[num_count]),"static/image/temp/temp.jpg")
     input_path = str(all_list[num_count])
     
+    p = Path("static/movie/input")
+    all_list = list(p.glob("*.mp4"))
+    app.logger.debug(all_list)
     return render_template('hello.html', all_list = all_list)
 
 @app.route('/good')
