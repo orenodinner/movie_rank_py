@@ -19,7 +19,7 @@ num_count = 0
 p = Path("static/movie/input")
 all_list = list(p.glob("*.mp4"))
 app.logger.debug(all_list)
-
+print(all_list)
 
 @app.route('/')
 def hello(name=None):
